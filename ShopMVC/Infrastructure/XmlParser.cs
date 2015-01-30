@@ -25,19 +25,5 @@ namespace ShopMVC.Infrastructure
 
             return products;
         }
-        /*
-         * XmlDocument xmlDoc= new XmlDocument(); // Create an XML document object
-xmlDoc.Load("yourXMLFile.xml"); // Load the XML document from the specified file
-
-// Get elements
-XmlNodeList girlAddress = xmlDoc.GetElementsByTagName("gAddress");
-XmlNodeList girlAge = xmlDoc.GetElementsByTagName("gAge"); 
-XmlNodeList girlCellPhoneNumber = xmlDoc.GetElementsByTagName("gPhone");
-
-// Display the results
-Console.WriteLine("Address: " + girlAddress[0].InnerText);
-Console.WriteLine("Age: " + girlAge[0].InnerText);
-Console.WriteLine("Phone Number: " + girlCellPhoneNumber[0].InnerText);
-         */
     }
 }
