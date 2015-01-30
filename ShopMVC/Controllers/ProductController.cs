@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ShopMVC.Controllers
 {
-    public class ArticleController : Controller
+    public class ProductController : Controller
     {
         //
         // GET: /Article/

@@ -24,5 +24,13 @@ namespace ShopMVC.Controllers
             return View();
         }
 
+        //
+        // GET: /Cart/ThankYou
+
+        public ActionResult ThankYou()
+        {
+            return View();
+        }
+
     }
 }
