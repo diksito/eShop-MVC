@@ -197,6 +197,9 @@
     </Compile>
     <Compile Include="Infrastructure\XmlParser.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Basket.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
