@@ -5,10 +5,10 @@ using System.Web;
 
 namespace ShopMVC.Infrastructure
 {
-    public class XmlReader
+    public class XmlParser
     {
         public string XmlFilePath { get; set; }
-        public XmlReader(string filePath)
+        public XmlParser(string filePath)
         {
             this.XmlFilePath = filePath;
         }
