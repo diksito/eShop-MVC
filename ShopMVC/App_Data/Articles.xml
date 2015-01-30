@@ -1,9 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <articles>
   <article>
-    <id></id>
-    <title></title>
-    <description></description>
-    <price></price>
+    <id>2D5B823B-C556-496E-A36A-57062A20A41C</id>
+    <title>P1</title>
+    <description>TBC</description>
+    <price>10.99</price>
+  </article>
+  <article>
+    <id>8728506F-35C7-432C-84EA-CC1FA94D1F03</id>
+    <title>P2</title>
+    <description>TBC</description>
+    <price>10.99</price>
+  </article>
+  <article>
+    <id>EC1475D1-E99A-42EE-A93F-49FD61D21A1F</id>
+    <title>P3</title>
+    <description>TBC</description>
+    <price>10.99</price>
+  </article>
+  <article>
+    <id>39872EDC-A012-4BA9-8002-6A4C4C0463FA</id>
+    <title>P4</title>
+    <description>TBC</description>
+    <price>10.99</price>
+  </article>
+  <article>
+    <id>1D6823BF-B61C-40F9-924F-855E1DC80E98</id>
+    <title>P5</title>
+    <description>TBC</description>
+    <price>10.99</price>
+  </article>
+  <article>
+    <id>1D6823BF-B61C-40F9-924F-855E2DC80E98</id>
+    <title>P6</title>
+    <description>TBC</description>
+    <price>10.99</price>
+  </article>
+  <article>
+    <id>1D6823BF-B69C-40F9-924F-855E1DC80E98</id>
+    <title>P7</title>
+    <description>TBC</description>
+    <price>10.99</price>
+  </article>
+  <article>
+    <id>1D6843BF-B61C-40F9-924F-855E1DC80E98</id>
+    <title>P5</title>
+    <description>TBC</description>
+    <price>10.99</price>
   </article>
 </articles>
