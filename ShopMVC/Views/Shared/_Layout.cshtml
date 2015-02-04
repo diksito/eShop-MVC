@@ -1,8 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@{
+    int countCartItems = 0;
+    if(ViewBag.CartCounter != null)
+    {
+        countCartItems = ViewBag.CartCounter;
+    }
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <title>@ViewBag.Title - eShop</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,12 +21,10 @@
     <div class="container">
         <div class="masthead">
             <h3 class="text-muted">E-Shop</h3>
-            <nav>
-                <ul class="nav nav-justified">
-                    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>Cart (5)</li>
-                </ul>
-            </nav>
+            <ol class="breadcrumb">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>Cart (<span id="cartCounter">@countCartItems</span>)</li>
+            </ol>
         </div>
 
         @RenderBody()

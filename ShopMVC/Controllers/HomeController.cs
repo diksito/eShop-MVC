@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShopMVC.Infrastructure;
+using ShopMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,23 +12,28 @@ namespace ShopMVC.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.CartCounter = 0;
+            XmlParser parser = new XmlParser();
+            List<Product> products = parser.GetProducts();
 
-            return View();
-        }
+            int countProducts = products.Count;
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
+            // count pages
+            int pages = 0;
+            if(countProducts > Constants.PRODUCTS_PER_PAGE)
+                pages = (products.Count / Constants.PRODUCTS_PER_PAGE) + 1;
+            ViewBag.Pages = pages;
 
-            return View();
-        }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            Page page = new Page
+            {
+                Products = products,
+                Current = 1,
+                CountAll = pages
+            };
 
-            return View();
+
+            return View(page);
         }
     }
 }
