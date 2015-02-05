@@ -8,5 +8,6 @@ namespace ShopMVC.Infrastructure
     public class Constants
     {
         public const int PRODUCTS_PER_PAGE = 10;
+        public const string SESSION_VISITOR = "visitor";
     }
 }

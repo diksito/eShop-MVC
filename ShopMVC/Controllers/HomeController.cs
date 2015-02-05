@@ -12,6 +12,10 @@ namespace ShopMVC.Controllers
     {
         public ActionResult Index()
         {
+            // Current visitor
+            if (HttpContext.Session[Constants.SESSION_VISITOR] == null)
+                HttpContext.Session[Constants.SESSION_VISITOR] = Guid.NewGuid();
+
             ViewBag.CartCounter = 0;
             XmlParser parser = new XmlParser();
             List<Product> products = parser.GetProducts();

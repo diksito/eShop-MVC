@@ -200,6 +200,10 @@
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Infrastructure\XmlParser.cs" />
+    <Compile Include="Migrations\201502052306017_IncludeBasket.cs" />
+    <Compile Include="Migrations\201502052306017_IncludeBasket.Designer.cs">
+      <DependentUpon>201502052306017_IncludeBasket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Basket.cs" />
@@ -342,7 +346,11 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Home\NotFound.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201502052306017_IncludeBasket.resx">
+      <DependentUpon>201502052306017_IncludeBasket.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

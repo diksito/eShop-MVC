@@ -9,5 +9,6 @@ namespace ShopMVC.Models
     {
         public Guid BasketId { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string VisitorId { get; set; }
     }
 }

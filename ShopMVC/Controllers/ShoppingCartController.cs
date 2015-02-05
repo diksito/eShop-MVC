@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopMVC.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,8 @@ namespace ShopMVC.Controllers
 {
     public class ShoppingCartController : ApiController
     {
+        ShopEntities db = new ShopEntities();
+
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
@@ -22,8 +25,9 @@ namespace ShopMVC.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public void Post(string productId, int qty)
         {
+           
         }
 
         // PUT api/<controller>/5

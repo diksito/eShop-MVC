@@ -17,5 +17,6 @@ namespace ShopMVC.DAL
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
     }
 }

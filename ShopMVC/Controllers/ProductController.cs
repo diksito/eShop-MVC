@@ -15,6 +15,10 @@ namespace ShopMVC.Controllers
 
         public ActionResult Index(string id)
         {
+            // Current visitor
+            if (HttpContext.Session[Constants.SESSION_VISITOR] == null)
+                HttpContext.Session[Constants.SESSION_VISITOR] = Guid.NewGuid();
+
             if (string.IsNullOrEmpty(id))
                 return HttpNotFound("Home");
 
