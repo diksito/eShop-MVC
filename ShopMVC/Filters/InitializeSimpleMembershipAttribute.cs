@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using ShopMVC.Models;
+using ShopMVC.DAL;
 
 namespace ShopMVC.Filters
 {
@@ -25,11 +26,11 @@ namespace ShopMVC.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<ShopEntities>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new ShopEntities())
                     {
                         if (!context.Database.Exists())
                         {

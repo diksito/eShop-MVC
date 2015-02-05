@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using ShopMVC.Filters;
 using ShopMVC.Models;
+using ShopMVC.DAL;
 
 namespace ShopMVC.Controllers
 {
@@ -263,7 +264,7 @@ namespace ShopMVC.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                using (ShopEntities db = new ShopEntities())
                 {
                     UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
