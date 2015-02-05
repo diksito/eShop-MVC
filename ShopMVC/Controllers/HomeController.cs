@@ -35,5 +35,11 @@ namespace ShopMVC.Controllers
 
             return View(page);
         }
+
+        // GET: /Home/NotFound
+        public ActionResult NotFound()
+        {
+            return View();
+        }
     }
 }
