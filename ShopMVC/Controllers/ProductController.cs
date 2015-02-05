@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShopMVC.Infrastructure;
+using ShopMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +18,11 @@ namespace ShopMVC.Controllers
             if (string.IsNullOrEmpty(id))
                 return HttpNotFound("Home");
 
-            return View();
+            XmlParser xmlParser = new XmlParser();
+
+            Product product = xmlParser.GetProduct(id);
+
+            return View(product);
         }
     }
 }
