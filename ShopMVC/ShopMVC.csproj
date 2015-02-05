@@ -200,6 +200,7 @@
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Infrastructure\XmlParser.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\Order.cs" />
