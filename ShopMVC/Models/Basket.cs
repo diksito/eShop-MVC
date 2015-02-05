@@ -7,7 +7,7 @@ namespace ShopMVC.Models
 {
     public class Basket
     {
-        public Guid BasetId { get; set; }
+        public Guid BasketId { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }
