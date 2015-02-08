@@ -32,5 +32,16 @@ namespace ShopMVC.Controllers
             return View();
         }
 
+        public ActionResult Add(string productId, int qty)
+        {
+            if(string.IsNullOrEmpty(productId))
+                return Json( new { status = false  });
+
+            if (qty < 1)
+                return Json(new { status = false });
+
+            return Json(new { status = true });
+        }
+
     }
 }
