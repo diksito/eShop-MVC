@@ -39,7 +39,7 @@ namespace ShopMVC.Controllers
             foreach (var item in basketItems)
             {
                 Product product = parser.GetProduct(item.ProductId);
-                product.Quantity = basketItems.Sum(b => b.Quantity);
+                product.Quantity = basketItems.Where(p => p.ProductId == item.ProductId).Sum(b => b.Quantity);
                 myBasketProducts.Add(product);
             }
 
