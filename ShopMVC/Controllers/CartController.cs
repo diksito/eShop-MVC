@@ -172,6 +172,30 @@ namespace ShopMVC.Controllers
             return Json(new { status = true, qty = countItems });
         }
 
+        [HttpPost]
+        public ActionResult GetProducts(int page)
+        {
+            XmlParser parser = new XmlParser();
+            List<Product> products = parser.GetProducts();
+            int skipProducts = page * Constants.PRODUCTS_PER_PAGE;
+            int tillProduct = skipProducts + Constants.PRODUCTS_PER_PAGE;
+
+            List<Product> productPerPage = new List<Product>();
+            for (int i = 0; i < products.Count; i++)
+            {
+                if(skipProducts < i && tillProduct > i)
+                {
+                    // trim description
+                    if (products[i].Description.Length > 30)
+                        products[i].Description = products[i].Description.Substring(0, 30) + "...";
+
+                    productPerPage.Add(products[i]);
+                }
+            }
+
+            return Json(new {  products = productPerPage });
+        }
+
         /// <summary>
         /// Get current visitor session id
         /// </summary>
