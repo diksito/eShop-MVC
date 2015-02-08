@@ -28,6 +28,7 @@ namespace ShopMVC.Models
         [DisplayName("Zip Code")]
         public string ZipCode { get; set; }
         [Required(ErrorMessage = "Email field is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
         [Required]
