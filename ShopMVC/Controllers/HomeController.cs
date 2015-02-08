@@ -1,4 +1,5 @@
-﻿using ShopMVC.Infrastructure;
+﻿using ShopMVC.DAL;
+using ShopMVC.Infrastructure;
 using ShopMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,23 @@ namespace ShopMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private ShopEntities db = new ShopEntities();
+
         public ActionResult Index()
         {
             // Current visitor
             if (HttpContext.Session[Constants.SESSION_VISITOR] == null)
-                HttpContext.Session[Constants.SESSION_VISITOR] = Guid.NewGuid();
+                HttpContext.Session[Constants.SESSION_VISITOR] = Guid.NewGuid().ToString();
+
+            string visitorId = (string)HttpContext.Session[Constants.SESSION_VISITOR];
+            List<Basket> basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
 
             ViewBag.CartCounter = 0;
+            if(basketItems != null)
+            {
+                ViewBag.CartCounter = basketItems.Sum(b => b.Quantity);
+            }
+
             XmlParser parser = new XmlParser();
             List<Product> products = parser.GetProducts();
 
