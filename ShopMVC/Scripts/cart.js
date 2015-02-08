@@ -2,17 +2,22 @@
 
 function addToBasket(productId, qty) {
 
-    var jqxhr = $.post("/api/ShoppingCart", { productId: productId, qty: qty }, function () {
-        console.log("ProductId: " + productId + " " + qty);
-        alert("success");
-    })
-    .done(function () {
-        alert("second success");
+    var jqxhr = $.post("/Cart/Add", { productId: productId, qty: qty }, function (data) {
+        if (data.status == true) {
+            updateBasketCounter(data.qty); // update counter
+        } else {
+            alert("Failed to add this item to basket");
+        }
     })
     .fail(function () {
-        alert("error");
-    })
-    .always(function () {
-        alert("finished");
+        alert("Error");
     });
+}
+
+function updateBasketCounter(count) {
+    if (count < 0) {
+        $("#cartCounter").html(0);
+    } else {
+        $("#cartCounter").html(count);
+    }
 }
