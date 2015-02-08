@@ -1,0 +1,43 @@
+﻿@model ShopMVC.Models.BasketSession
+
+@{
+    ViewBag.Title = "Basket";
+}
+
+<h2>Basket</h2>
+
+
+@if(Model.Products.Count > 0)
+{
+<table class="table table-bordered">
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sum</th>
+    </tr>
+    @foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Price</td>
+            <td>@item.Quantity</td>
+            <td>@(item.Quantity * item.Price)</td>
+        </tr>
+    }
+    <tr>
+        <td colspan="4"><strong>Total Price (incl. VAT):</strong> @Model.TotalPrice</td>
+    </tr>
+    <tr>
+        <td colspan="4"><strong>Total Price:</strong> @Model.TotalPriceWithoutVat</td>
+    </tr>
+</table>
+    @Html.ActionLink("Complete Check Out", "CheckOut", "Cart", null, new { @class = "btn btn-danger pull-right" })
+}
+else
+{
+    <div class="alert alert-danger">Your cart is empty.</div>
+}
+<p>
+    @Html.ActionLink("Back", "Index", "Home")
+</p>
