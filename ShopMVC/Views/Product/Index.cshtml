@@ -4,19 +4,26 @@
 }
 <div>@ViewBag.Title</div>
 
+
 <div class="panel panel-default">
     <div class="panel-heading">@Model.Title</div>
     <div class="panel-body">
-        <div><strong>Price:</strong> @Model.Price</div>
-        <div><strong>Description:</strong> @Model.Description</div>
-
-        <div>
-            <input class="form-control" style="width: 80px;" type="text" id="qty" name="qty" value="1" />
-            <button class="btn btn-primary">Add to Cart</button>
+        <div class="row">
+            <div class="col-md-3">
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkxLjUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMXB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjI0MngyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" alt="Product" data-holder-rendered="true">
+            </div>
+            <div class="col-md-8">
+                <div class="pull-right" >
+                    <input class="form-control" style="width: 80px; margin-bottom: 10px;" type="text" id="qty" name="qty" value="1" />
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+                <div><strong>Price:</strong> @Model.Price</div>
+            </div>
+            <div class="col-md-12"><strong>Description:</strong> @Model.Description</div>
         </div>
     </div>
 </div>
 
 <p>
-    @Html.ActionLink("Back", "Index")
+    @Html.ActionLink("Back", "Index", "Home")
 </p>
