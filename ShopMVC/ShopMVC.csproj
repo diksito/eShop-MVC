@@ -204,6 +204,10 @@
     <Compile Include="Migrations\201502052306017_IncludeBasket.Designer.cs">
       <DependentUpon>201502052306017_IncludeBasket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502081326572_PendingChange.cs" />
+    <Compile Include="Migrations\201502081326572_PendingChange.Designer.cs">
+      <DependentUpon>201502081326572_PendingChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Basket.cs" />
@@ -349,6 +353,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201502052306017_IncludeBasket.resx">
       <DependentUpon>201502052306017_IncludeBasket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502081326572_PendingChange.resx">
+      <DependentUpon>201502081326572_PendingChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

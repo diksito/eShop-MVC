@@ -1,9 +1,12 @@
 ﻿using ShopMVC.DAL;
+using ShopMVC.Infrastructure;
+using ShopMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace ShopMVC.Controllers
@@ -27,7 +30,12 @@ namespace ShopMVC.Controllers
         // POST api/<controller>
         public void Post(string productId, int qty)
         {
-           
+            Basket basket = new Basket
+            {
+                BasketId = Guid.NewGuid(),
+                CreatedDate = DateTime.UtcNow,
+                VisitorId = (string)HttpContext.Current.Session[Constants.SESSION_VISITOR]
+            };
         }
 
         // PUT api/<controller>/5
