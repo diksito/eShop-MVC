@@ -59,6 +59,8 @@ namespace ShopMVC.Controllers
         //
         // POST: /Cart/CheckOut
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CheckOut(Order order)
         {
             if (ModelState.IsValid)
