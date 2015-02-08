@@ -183,7 +183,7 @@ namespace ShopMVC.Controllers
             List<Product> productPerPage = new List<Product>();
             for (int i = 0; i < products.Count; i++)
             {
-                if(skipProducts < i && tillProduct > i)
+                if((skipProducts - 1) < i && tillProduct > i)
                 {
                     // trim description
                     if (products[i].Description.Length > 30)
