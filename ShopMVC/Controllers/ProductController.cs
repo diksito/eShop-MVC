@@ -20,11 +20,14 @@ namespace ShopMVC.Controllers
                 HttpContext.Session[Constants.SESSION_VISITOR] = Guid.NewGuid();
 
             if (string.IsNullOrEmpty(id))
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("NotFound", "Home");
 
             XmlParser xmlParser = new XmlParser();
 
             Product product = xmlParser.GetProduct(id);
+
+            if(product == null)
+                return RedirectToAction("NotFound", "Home");
 
             return View(product);
         }
