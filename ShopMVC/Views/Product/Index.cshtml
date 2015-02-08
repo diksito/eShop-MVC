@@ -15,6 +15,7 @@
                 <div class="pull-right" >
                     <input class="form-control" style="width: 80px; margin-bottom: 10px;" type="text" id="qty" name="qty" value="1" />
                     <button class="btn btn-primary" onclick="addToBasket('@Model.ProductId', $('#qty').val())">Add to Cart</button>
+                    @Html.ActionLink("Check out", "Basket", "Cart", null, new  { @class = "btn btn-danger" })
                 </div>
                 <div><strong>Price:</strong> @Model.Price</div>
             </div>

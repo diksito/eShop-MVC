@@ -53,7 +53,11 @@ namespace ShopMVC.Controllers
 
         public ActionResult CheckOut()
         {
-            return View();
+            Order order = new Order
+            {
+                CreatedDate = DateTime.UtcNow
+            };
+            return View(order);
         }
 
         //
@@ -65,13 +69,33 @@ namespace ShopMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 List<Basket> basketItems = getBasketProducts();
 
                 try
                 {
-                    foreach (var item in basketItems) // delete already stored items
+                    db.Orders.Add(order);
+                    db.SaveChanges();
+
+                    XmlParser parser = new XmlParser();
+                    foreach (var item in basketItems)
+                    {
+                        Product product = parser.GetProduct(item.ProductId);
+
+                        OrderDetail orderDetail = new OrderDetail
+                        {
+                            OrderId = order.OrderId,
+                            Price = product.Price,
+                            ProductId = item.ProductId,
+                            Quantity = item.Quantity,
+                            CreatedDate = DateTime.UtcNow
+                        };
+                        db.OrderDetails.Add(orderDetail);
+                        db.SaveChanges();
+
+                        // Remove from basket
                         db.Baskets.Remove(item);
+                        db.SaveChanges();
+                    }
                 }
                 catch(Exception)
                 {
