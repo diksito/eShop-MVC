@@ -1,4 +1,5 @@
-﻿using ShopMVC.Infrastructure;
+﻿using ShopMVC.DAL;
+using ShopMVC.Infrastructure;
 using ShopMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace ShopMVC.Controllers
 {
     public class ShopController : ApiController
     {
+        private ShopEntities db = new ShopEntities();
+
         // GET api/<controller>
         public List<Product> GetProducts(int page)
         {
@@ -43,6 +46,12 @@ namespace ShopMVC.Controllers
         // POST api/<controller>
         public void Post([FromBody]string value)
         {
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
