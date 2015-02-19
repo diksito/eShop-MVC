@@ -5,7 +5,7 @@ function loadProducts(page) {
         $("#productList").html("<h3 align='center'>Loading...</h3>");
 
         // get products
-        var jqxhr = $.post("/Cart/GetProducts", { page: page }, function (data) {
+        var jqxhr = $.post("api/Shop/GetProducts", { page: page }, function (data) {
 
             $("#productList").html("");
             // iterate over and apply this template

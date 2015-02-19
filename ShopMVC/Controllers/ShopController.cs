@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShopMVC.Infrastructure;
+using ShopMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,29 +12,36 @@ namespace ShopMVC.Controllers
     public class ShopController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public List<Product> GetProducts(int page)
         {
-            return new string[] { "value1", "value2" };
+            XmlParser parser = new XmlParser();
+            List<Product> products = parser.GetProducts();
+            int skipProducts = page * Constants.PRODUCTS_PER_PAGE;
+            int tillProduct = skipProducts + Constants.PRODUCTS_PER_PAGE;
+
+            List<Product> productPerPage = new List<Product>();
+            for (int i = 0; i < products.Count; i++)
+            {
+                if ((skipProducts - 1) < i && tillProduct > i)
+                {
+                    // trim description
+                    if (products[i].Description.Length > 30)
+                        products[i].Description = products[i].Description.Substring(0, 30) + "...";
+
+                    productPerPage.Add(products[i]);
+                }
+            }
+
+            return productPerPage;
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        // GET api/<controller>/AddToBasket/5
+        public void AddToBasket(string productId, int qty)
         {
-            return "value";
         }
 
         // POST api/<controller>
         public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
         {
         }
     }
