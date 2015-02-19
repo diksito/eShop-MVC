@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopMVC.Infrastructure;
+using System;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,14 +16,7 @@ namespace ShopMVC.Helpers
         /// <returns></returns>
         public static string Trim(this HtmlHelper helper, string text, int length)
         {
-            if(text.Length < length)
-            {
-                return text;
-            }
-            else
-            {
-                return text.Substring(0, length) + "...";
-            }
+            return Utility.Trim(text, length);
         }
     }
 }
