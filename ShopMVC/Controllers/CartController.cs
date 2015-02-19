@@ -75,7 +75,15 @@ namespace ShopMVC.Controllers
                 {
                     db.Orders.Add(order);
                     db.SaveChanges();
+                }
+                catch(Exception)
+                {
+                    ModelState.AddModelError("", "Cannot save your order please, try again.");
+                    return View(order);
+                }
 
+                try
+                {
                     XmlParser parser = new XmlParser();
                     foreach (var item in basketItems)
                     {
@@ -99,7 +107,8 @@ namespace ShopMVC.Controllers
                 }
                 catch(Exception)
                 {
-
+                    ModelState.AddModelError("", "Cannot save your order details please, try again.");
+                    return View(order);
                 }
                 return RedirectToAction("ThankYou", "Cart");
             }
