@@ -27,10 +27,7 @@ namespace ShopMVC.Controllers
             {
                 if ((skipProducts - 1) < i && tillProduct > i)
                 {
-                    // trim description
-                    if (products[i].Description.Length > 30)
-                        products[i].Description = products[i].Description.Substring(0, 30) + "...";
-
+                    products[i].Description = Utility.Trim(products[i].Description, 30); // trim description
                     productPerPage.Add(products[i]);
                 }
             }
