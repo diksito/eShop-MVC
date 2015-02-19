@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
+    <Compile Include="Infrastructure\ShopSession.cs" />
     <Compile Include="Infrastructure\Utility.cs" />
     <Compile Include="Infrastructure\XmlParser.cs" />
     <Compile Include="Migrations\201502052306017_IncludeBasket.cs" />

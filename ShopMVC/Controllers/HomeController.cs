@@ -12,13 +12,12 @@ namespace ShopMVC.Controllers
     public class HomeController : Controller
     {
         private ShopEntities db = new ShopEntities();
+        private ShopSession session = new ShopSession();
 
         public ActionResult Index()
         {
-            // Current visitor
-            if (HttpContext.Session[Constants.SESSION_VISITOR] == null)
-                HttpContext.Session[Constants.SESSION_VISITOR] = Guid.NewGuid().ToString();
-
+            session.CheckSession(HttpContext); // Current visitor
+            
             string visitorId = (string)HttpContext.Session[Constants.SESSION_VISITOR];
             List<Basket> basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
 

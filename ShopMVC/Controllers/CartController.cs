@@ -13,6 +13,7 @@ namespace ShopMVC.Controllers
     public class CartController : Controller
     {
         private ShopEntities db = new ShopEntities();
+        private ShopSession session = new ShopSession();
         //
         // GET: /Cart/
 
@@ -134,7 +135,7 @@ namespace ShopMVC.Controllers
             if (qty < 1)
                 return Json(new { status = false });
 
-            string visitorId = getCurrentVisitorId();
+            string visitorId = session.getUser(HttpContext);
 
             Basket existingItem = db.Baskets.Where(b => b.VisitorId == visitorId && b.ProductId == productId).FirstOrDefault();
             if(existingItem != null)
@@ -181,23 +182,9 @@ namespace ShopMVC.Controllers
             return Json(new { status = true, qty = countItems });
         }
 
-        /// <summary>
-        /// Get current visitor session id
-        /// </summary>
-        /// <returns>GUID as string</returns>
-        private string getCurrentVisitorId()
-        {
-            if (HttpContext.Session[Constants.SESSION_VISITOR] == null)
-                HttpContext.Session[Constants.SESSION_VISITOR] = Guid.NewGuid().ToString();
-
-            string visitorId = (string)HttpContext.Session[Constants.SESSION_VISITOR];
-
-            return visitorId;
-        }
-
         private List<Basket> getBasketProducts()
         {
-            string visitorId = getCurrentVisitorId();
+            string visitorId = session.getUser(HttpContext);
             List<Basket> basketItems = new List<Models.Basket>();
             basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
             return basketItems;

@@ -12,19 +12,19 @@ namespace ShopMVC.Controllers
     public class ProductController : Controller
     {
         private ShopEntities db = new ShopEntities();
+        private ShopSession session = new ShopSession();
         //
         // GET: /Product/
 
         public ActionResult Index(string id)
         {
             // Current visitor
-            if (HttpContext.Session[Constants.SESSION_VISITOR] == null)
-                HttpContext.Session[Constants.SESSION_VISITOR] = Guid.NewGuid();
+            session.CheckSession(HttpContext);
 
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("NotFound", "Home");
 
-            string visitorId = (string)HttpContext.Session[Constants.SESSION_VISITOR];
+            string visitorId = session.getUser(HttpContext);
             List<Basket> basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
 
             ViewBag.CartCounter = 0;
