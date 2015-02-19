@@ -42,5 +42,11 @@ namespace ShopMVC.Controllers
 
             return View(product);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

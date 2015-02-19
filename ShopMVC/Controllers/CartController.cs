@@ -218,5 +218,10 @@ namespace ShopMVC.Controllers
             return basketItems;
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }
