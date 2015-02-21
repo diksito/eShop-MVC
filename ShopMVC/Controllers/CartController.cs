@@ -27,7 +27,8 @@ namespace ShopMVC.Controllers
         // GET: /Bassket/
         public ActionResult Basket()
         {
-            List<Basket> basketItems = getBasketProducts();
+            string visitorId = session.getUser(HttpContext.Session);
+            List<Basket> basketItems = store.GetBasketProducts(db, session, visitorId);
             ViewBag.CartCounter = 0;
             if (basketItems != null)
             {
@@ -69,7 +70,8 @@ namespace ShopMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<Basket> basketItems = getBasketProducts();
+                string visitorId = session.getUser(HttpContext.Session);
+                List<Basket> basketItems = store.GetBasketProducts(db, session, visitorId);
 
                 try
                 {
@@ -178,14 +180,6 @@ namespace ShopMVC.Controllers
             }
 
             return Json(new { status = true, qty = countItems });
-        }
-
-        private List<Basket> getBasketProducts()
-        {
-            string visitorId = session.getUser(HttpContext.Session);
-            List<Basket> basketItems = new List<Models.Basket>();
-            basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
-            return basketItems;
         }
 
         protected override void Dispose(bool disposing)

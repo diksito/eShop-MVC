@@ -42,5 +42,15 @@ namespace ShopMVC.Infrastructure
             Product product = Products.Where(p => p.ProductId == productId).FirstOrDefault();
             return product;
         }
+
+        public List<Basket> GetBasketProducts(ShopEntities db, ShopSession session, string visitorId)
+        {
+            if (string.IsNullOrEmpty(visitorId))
+                throw new NullReferenceException("VisitorId is not initialized");
+
+            List<Basket> basketItems = new List<Models.Basket>();
+            basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
+            return basketItems;
+        }
     }
 }
