@@ -1,8 +1,9 @@
 ﻿/// <reference path="jquery-1.9.0.min.js" />
 
 function addToBasket(productId, qty) {
+    var url = $('#productContainer').data('request-url');
 
-    var jqxhr = $.post("http://localhost:29139/api/Shop", { productId: productId, quantity: qty }, function (data) {
+    var jqxhr = $.post(url, { productId: productId, quantity: qty }, function (data) {
         console.log(data);
         if (data.Status == true) {
             updateBasketCounter(data.Quantity); // update counter
