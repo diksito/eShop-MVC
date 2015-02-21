@@ -24,5 +24,11 @@ namespace ShopMVC
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
         }
+
+        // Enable HttpContext.Session in Web Api 2
+        protected void Application_PostAuthorizeRequest() 
+        {
+            System.Web.HttpContext.Current.SetSessionStateBehavior(System.Web.SessionState.SessionStateBehavior.Required);
+        }
     }
 }
