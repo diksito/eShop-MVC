@@ -3,9 +3,11 @@ using ShopMVC.Infrastructure;
 using ShopMVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace ShopMVC.Controllers
@@ -13,12 +15,13 @@ namespace ShopMVC.Controllers
     public class ShopController : ApiController
     {
         private ShopEntities db = new ShopEntities();
+        private ShopSession session = new ShopSession();
+        private Store store = new Store();
 
         // GET api/<controller>
         public List<Product> GetProducts(int page)
         {
-            XmlParser parser = new XmlParser();
-            List<Product> products = parser.GetProducts();
+            List<Product> products = store.GetAllProducts();
             int skipProducts = page * Constants.PRODUCTS_PER_PAGE;
             int tillProduct = skipProducts + Constants.PRODUCTS_PER_PAGE;
 
@@ -35,14 +38,73 @@ namespace ShopMVC.Controllers
             return productPerPage;
         }
 
-        // GET api/<controller>/AddToBasket/5
-        public void AddToBasket(string productId, int qty)
+        // GET api/<controller>/Add/5
+        public ProductSummary Post([FromBody]ProductAdd product)
         {
-        }
+            int qty = product.quantity;
+            string productId = product.productId;
+            ProductSummary summary = new ProductSummary
+            {
+                Status = false
+            };
+            if (string.IsNullOrEmpty(productId))
+                return summary;
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
+            if (qty < 1)
+                return summary;
+
+            //HttpContextBase context = (HttpContextBase)Request.Properties["MS_HttpContext"];
+            var context = HttpContext.Current;
+            HttpContextBase abstractContext = new System.Web.HttpContextWrapper(context);
+
+            string visitorId = session.getUser(abstractContext.Session);
+
+            Basket existingItem = db.Baskets.Where(b => b.VisitorId == visitorId && b.ProductId == productId).FirstOrDefault();
+            if (existingItem != null)
+            {
+                existingItem.Quantity += qty;
+                try
+                {
+                    db.Entry(existingItem).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return summary;
+                }
+            }
+            else
+            {
+                Basket basket = new Basket
+                {
+                    BasketId = Guid.NewGuid(),
+                    VisitorId = visitorId,
+                    Quantity = qty,
+                    ProductId = productId,
+                    CreatedDate = DateTime.UtcNow
+                };
+                try
+                {
+                    db.Baskets.Add(basket);
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return summary;
+                }
+            }
+
+            List<Basket> basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
+            int countItems = qty;
+            if (basketItems != null)
+            {
+                countItems = basketItems.Sum(a => a.Quantity);
+            }
+
+            summary.Status = true;
+            summary.Quantity = countItems;
+
+            return summary;
         }
 
         protected override void Dispose(bool disposing)

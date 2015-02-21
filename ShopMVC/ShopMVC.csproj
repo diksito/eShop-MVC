@@ -198,9 +198,12 @@
     </Compile>
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
+    <Compile Include="Infrastructure\Parser.cs" />
+    <Compile Include="Infrastructure\Store.cs" />
     <Compile Include="Infrastructure\ShopSession.cs" />
     <Compile Include="Infrastructure\Utility.cs" />
     <Compile Include="Infrastructure\XmlParser.cs" />
+    <Compile Include="Interfaces\IParser.cs" />
     <Compile Include="Migrations\201502052306017_IncludeBasket.cs" />
     <Compile Include="Migrations\201502052306017_IncludeBasket.Designer.cs">
       <DependentUpon>201502052306017_IncludeBasket.cs</DependentUpon>
@@ -221,6 +224,8 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductAdd.cs" />
+    <Compile Include="Models\ProductSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,76 +7,41 @@ using System.Xml;
 
 namespace ShopMVC.Infrastructure
 {
-    public class XmlParser
+    public class XmlParser : Parser
     {
         private string xmlFilePath = "~/App_Data/Articles.xml";
+
+        private List<Product> products { get; set; }
+
+        //public override List<Product> Data { get; set; }
         public XmlParser()
         {
-            if (!System.IO.File.Exists(HttpContext.Current.Server.MapPath(xmlFilePath)))
-                throw new Exception("XML file with articles is missing");
+
         }
 
-        public Product GetProduct(string productId)
+        public XmlParser(string fileName)
         {
-            if (string.IsNullOrEmpty(productId))
-                return null;
+            if (!System.IO.File.Exists(HttpContext.Current.Server.MapPath(fileName)))
+                throw new Exception("XML file with articles is missing");
+        }
+        public override Object GetData()
+        {
+            return products;
+        }
 
+        public override void Parse()
+        {
+            products = new List<Product>();
             #region Parsing XML
             XmlDocument xmlDoc = new XmlDocument(); // Create an XML document object
             xmlDoc.Load(HttpContext.Current.Server.MapPath(xmlFilePath)); // Load the XML document from the specified file
 
             // Get elements
-            XmlNodeList idNode = xmlDoc.GetElementsByTagName("id");
-            XmlNodeList titleNode = xmlDoc.GetElementsByTagName("title");
-            XmlNodeList descriptionNode = xmlDoc.GetElementsByTagName("description");
-            XmlNodeList priceNode = xmlDoc.GetElementsByTagName("price");
+            XmlNodeList idNode = xmlDoc.GetElementsByTagName(XMLField.ID);
+            XmlNodeList titleNode = xmlDoc.GetElementsByTagName(XMLField.TITLE);
+            XmlNodeList descriptionNode = xmlDoc.GetElementsByTagName(XMLField.DESCRIPTION);
+            XmlNodeList priceNode = xmlDoc.GetElementsByTagName(XMLField.PRICE);
 
-            // Look up through all products
-            for (int i = 0; i < idNode.Count; i++)
-            {
-                // If found product, then return it
-                if (productId == idNode[i].InnerText)
-                {
-                    try
-                    {
-                        decimal currPrice = 0;
-                        Decimal.TryParse(priceNode[i].InnerText, out currPrice);
-
-                        Product product = new Product
-                        {
-                            ProductId = idNode[i].InnerText,
-                            Title = titleNode[i].InnerText,
-                            Description = descriptionNode[i].InnerText,
-                            Price = currPrice
-                        };
-
-                        return product;
-                    }
-                    catch (Exception)
-                    {
-                        return null;
-                    }
-                }
-            }
-            #endregion
-
-            return null;
-        }
-
-        public List<Product> GetProducts()
-        {
-            List<Product> products = new List<Product>();
-
-            #region Parsing XML
-            XmlDocument xmlDoc= new XmlDocument(); // Create an XML document object
-            xmlDoc.Load(HttpContext.Current.Server.MapPath(xmlFilePath)); // Load the XML document from the specified file
-
-            // Get elements
-            XmlNodeList idNode = xmlDoc.GetElementsByTagName("id");
-            XmlNodeList titleNode = xmlDoc.GetElementsByTagName("title");
-            XmlNodeList descriptionNode = xmlDoc.GetElementsByTagName("description");
-            XmlNodeList priceNode = xmlDoc.GetElementsByTagName("price");
-            
             for (int i = 0; i < idNode.Count; i++)
             {
                 try
@@ -92,11 +57,23 @@ namespace ShopMVC.Infrastructure
                         Price = currPrice
                     });
                 }
-                catch(Exception) { }
+                catch (Exception exc)
+                {
+                    Console.WriteLine(exc.Message);
+                }
             }
             #endregion
+        }
 
-            return products;
+        /// <summary>
+        /// XML Node names
+        /// </summary>
+        class XMLField
+        {
+            public const string ID = "id";
+            public const string TITLE = "title";
+            public const string DESCRIPTION = "description";
+            public const string PRICE = "price";
         }
     }
 }

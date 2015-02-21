@@ -14,23 +14,23 @@ namespace ShopMVC.Infrastructure
         /// Get current user's session id
         /// </summary>
         /// <returns></returns>
-        public string getUser(HttpContextBase http)
+        public string getUser(HttpSessionStateBase session)
         {
-            initSession(http);
-            return (string)http.Session[Constants.SESSION_VISITOR];
+            initSession(session);
+            return (string)session[Constants.SESSION_VISITOR];
         }
         /// <summary>
         /// Check if user's session is existing if not create a new one
         /// </summary>
-        public void CheckSession(HttpContextBase http)
+        public void CheckSession(HttpSessionStateBase session)
         {
-            initSession(http);
+            initSession(session);
         }
 
-        private void initSession(HttpContextBase http)
+        private void initSession(HttpSessionStateBase session)
         {
-            if (http.Session[Constants.SESSION_VISITOR] == null)
-                http.Session[Constants.SESSION_VISITOR] = Guid.NewGuid().ToString();
+            if (session[Constants.SESSION_VISITOR] == null)
+                session[Constants.SESSION_VISITOR] = Guid.NewGuid().ToString();
         }
     }
 }

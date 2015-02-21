@@ -14,6 +14,7 @@ namespace ShopMVC.Controllers
     {
         private ShopEntities db = new ShopEntities();
         private ShopSession session = new ShopSession();
+        private Store store = new Store();
         //
         // GET: /Cart/
 
@@ -26,8 +27,6 @@ namespace ShopMVC.Controllers
         // GET: /Bassket/
         public ActionResult Basket()
         {
-            XmlParser parser = new XmlParser();
-
             List<Basket> basketItems = getBasketProducts();
             ViewBag.CartCounter = 0;
             if (basketItems != null)
@@ -39,7 +38,7 @@ namespace ShopMVC.Controllers
 
             foreach (var item in basketItems)
             {
-                Product product = parser.GetProduct(item.ProductId);
+                Product product = store.GetProduct(item.ProductId);
                 product.Quantity = basketItems.Where(p => p.ProductId == item.ProductId).Sum(b => b.Quantity);
                 myBasketProducts.Add(product);
             }
@@ -85,10 +84,9 @@ namespace ShopMVC.Controllers
 
                 try
                 {
-                    XmlParser parser = new XmlParser();
                     foreach (var item in basketItems)
                     {
-                        Product product = parser.GetProduct(item.ProductId);
+                        Product product = store.GetProduct(item.ProductId);
 
                         OrderDetail orderDetail = new OrderDetail
                         {
@@ -135,7 +133,7 @@ namespace ShopMVC.Controllers
             if (qty < 1)
                 return Json(new { status = false });
 
-            string visitorId = session.getUser(HttpContext);
+            string visitorId = session.getUser(HttpContext.Session);
 
             Basket existingItem = db.Baskets.Where(b => b.VisitorId == visitorId && b.ProductId == productId).FirstOrDefault();
             if(existingItem != null)
@@ -184,7 +182,7 @@ namespace ShopMVC.Controllers
 
         private List<Basket> getBasketProducts()
         {
-            string visitorId = session.getUser(HttpContext);
+            string visitorId = session.getUser(HttpContext.Session);
             List<Basket> basketItems = new List<Models.Basket>();
             basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
             return basketItems;

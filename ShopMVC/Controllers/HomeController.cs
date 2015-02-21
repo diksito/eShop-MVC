@@ -13,12 +13,11 @@ namespace ShopMVC.Controllers
     {
         private ShopEntities db = new ShopEntities();
         private ShopSession session = new ShopSession();
+        private Store store = new Store();
 
         public ActionResult Index()
         {
-            session.CheckSession(HttpContext); // Current visitor
-            
-            string visitorId = (string)HttpContext.Session[Constants.SESSION_VISITOR];
+            string visitorId = session.getUser(HttpContext.Session);
             List<Basket> basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
 
             ViewBag.CartCounter = 0;
@@ -27,9 +26,7 @@ namespace ShopMVC.Controllers
                 ViewBag.CartCounter = basketItems.Sum(b => b.Quantity);
             }
 
-            XmlParser parser = new XmlParser();
-            List<Product> products = parser.GetProducts();
-
+            List<Product> products = store.GetAllProducts();
             int countProducts = products.Count;
 
             // count pages

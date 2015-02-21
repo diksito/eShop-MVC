@@ -2,9 +2,10 @@
 
 function addToBasket(productId, qty) {
 
-    var jqxhr = $.post("/Cart/Add", { productId: productId, qty: qty }, function (data) {
-        if (data.status == true) {
-            updateBasketCounter(data.qty); // update counter
+    var jqxhr = $.post("http://localhost:29139/api/Shop", { productId: productId, quantity: qty }, function (data) {
+        console.log(data);
+        if (data.Status == true) {
+            updateBasketCounter(data.Quantity); // update counter
         } else {
             alert("Failed to add this item to basket");
         }
