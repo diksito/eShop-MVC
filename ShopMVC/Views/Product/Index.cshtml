@@ -2,8 +2,9 @@
 @{
     ViewBag.Title = "Product Details";
 }
+@section scripts{
 <script src="@Url.Content("~/Scripts/cart.js")" type="text/javascript"></script>
-
+}
 <div class="panel panel-default" id="productContainer" data-request-url="@Url.HttpRouteUrl("DefaultApi", new { controller = "Shop", method = "" })">
     <div class="panel-heading">@Model.Title</div>
     <div class="panel-body">
