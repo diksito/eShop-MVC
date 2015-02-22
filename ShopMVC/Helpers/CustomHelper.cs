@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace ShopMVC.Helpers
 {
-    public static class UrlHelper
+    public static class CustomHelper
     {
         /// <summary>
         /// Trim text
