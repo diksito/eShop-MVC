@@ -38,7 +38,7 @@ namespace ShopMVC.Controllers
 
             Page page = new Page
             {
-                Products = products.Take(10).ToList(),
+                Products = products.Take(Constants.PRODUCTS_PER_PAGE).ToList(),
                 CountAll = pages
             };
 
