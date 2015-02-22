@@ -3,9 +3,10 @@
 function loadProducts(page) {
     if (page > -1){
         $("#productList").html("<h3 align='center'>Loading...</h3>");
+        var url = $('#pagination').data('request-url'); //"api/Shop/GetProducts"
 
         // get products
-        var jqxhr = $.get("api/Shop/GetProducts", { page: page }, function (data) {
+        var jqxhr = $.get(url, { page: page }, function (data) {
 
             $("#productList").html("");
             // iterate over and apply this template
