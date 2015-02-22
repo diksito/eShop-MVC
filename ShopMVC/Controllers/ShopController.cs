@@ -53,7 +53,6 @@ namespace ShopMVC.Controllers
             if (qty < 1)
                 return summary;
 
-            //HttpContextBase context = (HttpContextBase)Request.Properties["MS_HttpContext"];
             var context = HttpContext.Current;
             HttpContextBase abstractContext = new System.Web.HttpContextWrapper(context);
 
