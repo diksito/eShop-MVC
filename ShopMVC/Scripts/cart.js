@@ -4,7 +4,6 @@ function addToBasket(productId, qty) {
     var url = $('#productContainer').data('request-url');
 
     var jqxhr = $.post(url, { productId: productId, quantity: qty }, function (data) {
-        console.log(data);
         if (data.Status == true) {
             updateBasketCounter(data.Quantity); // update counter
         } else {
