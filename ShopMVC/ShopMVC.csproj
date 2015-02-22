@@ -217,7 +217,6 @@
       <DependentUpon>201502082236273_RemoveDefaultProfiles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\BasketSession.cs" />
     <Compile Include="Models\Order.cs" />
