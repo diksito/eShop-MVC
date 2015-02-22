@@ -19,9 +19,6 @@ namespace ShopMVC.Controllers
 
         public ActionResult Index(string id)
         {
-            // Current visitor
-            session.CheckSession(HttpContext.Session);
-
             if (string.IsNullOrEmpty(id))
                 return RedirectToAction("NotFound", "Home");
 

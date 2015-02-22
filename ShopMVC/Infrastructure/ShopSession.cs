@@ -16,7 +16,6 @@ namespace ShopMVC.Infrastructure
         /// <returns></returns>
         public string getUser(HttpSessionStateBase session)
         {
-            initSession(session);
             return (string)session[Constants.SESSION_VISITOR];
         }
         /// <summary>
