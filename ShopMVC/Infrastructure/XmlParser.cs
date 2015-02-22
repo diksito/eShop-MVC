@@ -13,7 +13,6 @@ namespace ShopMVC.Infrastructure
 
         private List<Product> products { get; set; }
 
-        //public override List<Product> Data { get; set; }
         public XmlParser()
         {
 
