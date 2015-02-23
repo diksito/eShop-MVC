@@ -23,13 +23,9 @@ namespace ShopMVC.Controllers
                 return RedirectToAction("NotFound", "Home");
 
             string visitorId = session.getUser(HttpContext.Session);
-            List<Basket> basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
-
-            ViewBag.CartCounter = 0;
-            if (basketItems != null)
-            {
-                ViewBag.CartCounter = basketItems.Sum(b => b.Quantity);
-            }
+            
+            List<Basket> basketItems = store.GetBasketItems(visitorId, db);
+            ViewBag.CartCounter = basketItems.Sum(b => b.Quantity);
 
             Product product = store.GetProduct(id);
 

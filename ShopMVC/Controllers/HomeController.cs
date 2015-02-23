@@ -18,13 +18,9 @@ namespace ShopMVC.Controllers
         public ActionResult Index()
         {
             string visitorId = session.getUser(HttpContext.Session);
-            List<Basket> basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
 
-            ViewBag.CartCounter = 0;
-            if(basketItems != null)
-            {
-                ViewBag.CartCounter = basketItems.Sum(b => b.Quantity);
-            }
+            List<Basket> basketItems = store.GetBasketItems(visitorId, db);
+            ViewBag.CartCounter = basketItems.Sum(b => b.Quantity);
 
             List<Product> products = store.GetAllProducts();
             int countProducts = products.Count;

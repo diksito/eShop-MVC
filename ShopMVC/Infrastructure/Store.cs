@@ -29,6 +29,17 @@ namespace ShopMVC.Infrastructure
             return Products;
         }
 
+        public List<Basket> GetBasketItems(string visitorId, ShopEntities db)
+        {
+            List<Basket> items = new List<Basket>();
+            if (string.IsNullOrEmpty(visitorId))
+                return items; // return empty list
+
+            items = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
+
+            return items;
+        }
+
         /// <summary>
         /// Get single product
         /// </summary>
@@ -45,10 +56,11 @@ namespace ShopMVC.Infrastructure
 
         public List<Basket> GetBasketProducts(ShopEntities db, ShopSession session, string visitorId)
         {
-            if (string.IsNullOrEmpty(visitorId))
-                throw new NullReferenceException("VisitorId is not initialized");
-
             List<Basket> basketItems = new List<Models.Basket>();
+            if (string.IsNullOrEmpty(visitorId))
+                return basketItems;
+
+            basketItems = new List<Models.Basket>();
             basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
             return basketItems;
         }
