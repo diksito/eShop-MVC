@@ -15,13 +15,6 @@ namespace ShopMVC.Controllers
         private ShopEntities db = new ShopEntities();
         private ShopSession session = new ShopSession();
         private Store store = new Store();
-        //
-        // GET: /Cart/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         //
         // GET: /Bassket/
