@@ -17,7 +17,7 @@ namespace ShopMVC.Controllers
         private Store store = new Store();
 
         //
-        // GET: /Bassket/
+        // GET: /Cart/Basket/
         public ActionResult Basket()
         {
             string visitorId = session.getUser(HttpContext.Session);
