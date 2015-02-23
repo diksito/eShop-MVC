@@ -29,15 +29,12 @@ namespace ShopMVC.Controllers
             int pages = 0;
             if(countProducts > Constants.PRODUCTS_PER_PAGE)
                 pages = (products.Count / Constants.PRODUCTS_PER_PAGE) + 1;
-            ViewBag.Pages = pages;
-
 
             Page page = new Page
             {
                 Products = products.Take(Constants.PRODUCTS_PER_PAGE).ToList(),
                 CountAll = pages
             };
-
 
             return View(page);
         }
