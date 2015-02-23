@@ -29,11 +29,7 @@ namespace ShopMVC.Controllers
         {
             string visitorId = session.getUser(HttpContext.Session);
             List<Basket> basketItems = store.GetBasketProducts(db, session, visitorId);
-            ViewBag.CartCounter = 0;
-            if (basketItems != null)
-            {
-                ViewBag.CartCounter = basketItems.Sum(b => b.Quantity);
-            }
+            ViewBag.CartCounter = basketItems.Sum(b => b.Quantity);
 
             List<Product> myBasketProducts = new List<Product>();
 
