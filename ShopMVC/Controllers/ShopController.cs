@@ -53,9 +53,7 @@ namespace ShopMVC.Controllers
             if (qty < 1)
                 return summary;
 
-            var context = HttpContext.Current;
-            HttpContextBase abstractContext = new System.Web.HttpContextWrapper(context);
-
+            HttpContextBase abstractContext = new System.Web.HttpContextWrapper(HttpContext.Current);
             string visitorId = session.getUser(abstractContext.Session);
 
             Basket existingItem = db.Baskets.Where(b => b.VisitorId == visitorId && b.ProductId == productId).FirstOrDefault();
