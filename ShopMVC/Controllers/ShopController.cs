@@ -93,12 +93,8 @@ namespace ShopMVC.Controllers
                 }
             }
 
-            List<Basket> basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
-            int countItems = qty;
-            if (basketItems != null)
-            {
-                countItems = basketItems.Sum(a => a.Quantity);
-            }
+            List<Basket> basketItems = store.GetBasketItems(visitorId, db);
+            int countItems = basketItems.Sum(a => a.Quantity);
 
             summary.Status = true;
             summary.Quantity = countItems;
