@@ -23,17 +23,11 @@ namespace ShopMVC.Controllers
             ViewBag.CartCounter = basketItems.Sum(b => b.Quantity);
 
             List<Product> products = store.GetAllProducts();
-            int countProducts = products.Count;
-
-            // count pages
-            int pages = 0;
-            if(countProducts > Constants.PRODUCTS_PER_PAGE)
-                pages = (products.Count / Constants.PRODUCTS_PER_PAGE) + 1;
 
             Page page = new Page
             {
                 Products = products.Take(Constants.PRODUCTS_PER_PAGE).ToList(),
-                CountAll = pages
+                CountAll = Paging.CountAllPages(products.Count) // count pages
             };
 
             return View(page);

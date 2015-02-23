@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="Helpers\CustomHelper.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
+    <Compile Include="Infrastructure\Paging.cs" />
     <Compile Include="Infrastructure\Parser.cs" />
     <Compile Include="Infrastructure\Store.cs" />
     <Compile Include="Infrastructure\ShopSession.cs" />

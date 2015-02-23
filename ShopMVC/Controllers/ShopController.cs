@@ -22,7 +22,7 @@ namespace ShopMVC.Controllers
         public List<Product> GetProducts(int page)
         {
             List<Product> products = store.GetAllProducts();
-            int skipProducts = page * Constants.PRODUCTS_PER_PAGE;
+            int skipProducts = Paging.CountSkippedItems(page);
             int tillProduct = skipProducts + Constants.PRODUCTS_PER_PAGE;
 
             List<Product> productPerPage = new List<Product>();
