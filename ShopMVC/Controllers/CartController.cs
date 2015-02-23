@@ -116,61 +116,6 @@ namespace ShopMVC.Controllers
             return View();
         }
 
-        public ActionResult Add(string productId, int qty)
-        {
-            if(string.IsNullOrEmpty(productId))
-                return Json( new { status = false });
-
-            if (qty < 1)
-                return Json(new { status = false });
-
-            string visitorId = session.getUser(HttpContext.Session);
-
-            Basket existingItem = db.Baskets.Where(b => b.VisitorId == visitorId && b.ProductId == productId).FirstOrDefault();
-            if(existingItem != null)
-            {
-                existingItem.Quantity += qty;
-                try
-                {
-                    db.Entry(existingItem).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                catch(Exception)
-                {
-                    return Json(new { status = false });
-                }
-            }
-            else
-            {
-                Basket basket = new Basket
-                {
-                    BasketId = Guid.NewGuid(),
-                    VisitorId = visitorId,
-                    Quantity = qty,
-                    ProductId = productId,
-                    CreatedDate = DateTime.UtcNow
-                };
-                try
-                {
-                    db.Baskets.Add(basket);
-                    db.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    return Json(new { status = false });
-                }
-            }
-
-            List<Basket> basketItems = db.Baskets.Where(b => b.VisitorId == visitorId).ToList();
-            int countItems = qty;
-            if (basketItems != null)
-            {
-                countItems = basketItems.Sum(a => a.Quantity);
-            }
-
-            return Json(new { status = true, qty = countItems });
-        }
-
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
